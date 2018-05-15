@@ -39,6 +39,7 @@ def excepthook(exc_type, exc_value, exc_traceback):
     lexer = Python3TracebackLexer(stripall=True, tabsize=4)
     formatter = Terminal256Formatter(style='vim', bg='dark')
     logging.error(highlight(tb, lexer, formatter).strip())
+    print('\x07', end='', flush=True)
 
 
 sys.excepthook = excepthook
@@ -57,4 +58,4 @@ asyncio.get_event_loop().set_exception_handler(asyncio_exception_handler)
 
 
 # leave here alone
-__version__ = '0.0.2'
+__version__ = '0.0.3'
