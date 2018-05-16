@@ -14,9 +14,6 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from .logger import logging
-logging.getLogger('matplotlib').setLevel(logging.WARNING) # noqa
-
 import matplotlib.pyplot as plt
 
 
