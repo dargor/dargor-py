@@ -6,7 +6,6 @@ pipeline {
         stage('build') {
             steps {
                 sh '''
-                    pip install -Ur requirements.txt
                     make
                     pip install -U dist/*.whl
                 '''
