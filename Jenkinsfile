@@ -7,7 +7,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'make'
+                sh '''
+                    apt-get -qy update
+                    apt-get -qy install make
+                    make
+                    pip install -U dist/*.whl
+                '''
             }
         }
     }
