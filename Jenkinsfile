@@ -16,5 +16,12 @@ pipeline {
                 '''
             }
         }
+        stage('test') {
+            steps {
+                sh '''
+                    python -c 'import dargor'
+                '''
+            }
+        }
     }
 }
