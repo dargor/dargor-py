@@ -10,6 +10,7 @@ pipeline {
                 sh '''
                     apt-get -qy update
                     apt-get -qy install make
+                    pip install -Ur requirements.txt
                     make
                     pip install -U dist/*.whl
                 '''
