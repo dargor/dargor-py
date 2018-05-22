@@ -19,4 +19,9 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            archiveArtifacts artifacts: 'dist/*.whl', fingerprint: true
+        }
+    }
 }
