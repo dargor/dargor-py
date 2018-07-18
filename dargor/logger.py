@@ -89,6 +89,10 @@ logging.err = logging.error
 logging.crit = logging.critical
 
 
-# to find current loggers : logging.Logger.manager.loggerDict
+def current_loggers():
+    for logger in logging.Logger.manager.loggerDict:
+        print(logger)
+
+
 for module in ['matplotlib', 'parso']:
-    logging.getLogger(module).setLevel(logging.INFO)
+    logging.getLogger(module).setLevel(logging.WARNING)
