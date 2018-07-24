@@ -19,6 +19,8 @@ import logging
 import sys
 import os
 
+from contextlib import contextmanager
+
 
 logging.DUMP = logging.INFO + 1
 
@@ -70,6 +72,19 @@ if os.environ.get('DEBUG', '') == 'ALL':
 warnings.showwarning = showwarning
 warnings.formatwarning = formatwarning
 logging.captureWarnings(True)
+
+
+@contextmanager
+def ignore_warnings():
+    try:
+        logging.captureWarnings(False)
+        yield
+    finally:
+        logging.captureWarnings(True)
+
+
+assert not hasattr(logging, 'ignore_warnings')
+logging.ignore_warnings = ignore_warnings
 
 
 def dump(*args, **kwargs):
