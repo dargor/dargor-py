@@ -28,6 +28,7 @@ setup(
     license='ISC',
     install_requires=[
         'matplotlib',
+        'pandas',
         'pygments',
     ],
     extras_require={

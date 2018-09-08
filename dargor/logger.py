@@ -64,10 +64,15 @@ for level, color in ((logging.DEBUG, 36),
                      (logging.CRITICAL, 35)):
     logging.addLevelName(level, format_color(level, color))
 
+
 if os.environ.get('DEBUG', '') == 'ALL':
     # print the first occurrence of matching warnings,
     # for each location where the warning is issued.
     warnings.simplefilter('default')
+    # code specific to catch common pandas errors
+    from pandas.core.common import SettingWithCopyWarning
+    warnings.simplefilter('error', SettingWithCopyWarning)
+
 
 warnings.showwarning = showwarning
 warnings.formatwarning = formatwarning
