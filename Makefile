@@ -22,7 +22,7 @@ format:
 	-grep --color=always --exclude=Makefile -ir '\.format('
 
 wheel: clean format
-	./setup.py bdist_wheel
+	python setup.py bdist_wheel
 
 clean:
 	rm -rf build dist *.egg-info
