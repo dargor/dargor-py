@@ -58,4 +58,4 @@ asyncio.get_event_loop().set_exception_handler(asyncio_exception_handler)
 
 
 # leave here alone
-__version__ = '0.0.10'
+__version__ = '0.0.11'
