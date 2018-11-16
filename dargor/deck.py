@@ -20,7 +20,7 @@ from collections import deque
 from contextlib import suppress
 
 
-class History(deque):
+class deck(deque):
 
     def __getitem__(self, val):
 
@@ -46,7 +46,7 @@ class History(deque):
 if __name__ == '__main__':
 
     l = list(range(30))
-    h = History(list(range(30)))
+    h = deck(list(range(30)))
 
     assert l[10] == h[10]
     assert l[-10] == h[-10]
