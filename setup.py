@@ -27,6 +27,7 @@ setup(
     author_email='linder.gabriel@gmail.com',
     license='ISC',
     install_requires=[
+        'geoip2',
         'matplotlib',
         'pandas',
         'pygments',
