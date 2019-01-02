@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -72,6 +72,8 @@ if os.environ.get('DEBUG', '') == 'ALL':
     # code specific to catch common pandas errors
     from pandas.core.common import SettingWithCopyWarning
     warnings.simplefilter('error', SettingWithCopyWarning)
+    # we also want to catch future warnings
+    warnings.simplefilter('error', FutureWarning)
 
 
 warnings.showwarning = showwarning
