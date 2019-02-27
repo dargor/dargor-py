@@ -14,7 +14,10 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-import pprint
+from pprint import PrettyPrinter
 
 
-pp = pprint.PrettyPrinter(indent=4, width=-1)
+pp = PrettyPrinter(indent=4, width=-1)
+
+pprint = pp.pprint
+pformat = pp.pformat
