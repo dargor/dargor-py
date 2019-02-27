@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -45,6 +45,11 @@ class deck(deque):
 
 if __name__ == '__main__':
 
+    def sample(population):
+        import random as rn
+        rn.seed(42)
+        return rn.sample(population, 13)
+
     l = list(range(30))
     h = deck(list(range(30)))
 
@@ -66,3 +71,5 @@ if __name__ == '__main__':
 
     assert l[:100] == h[:100]
     assert l[:-100] == h[:-100]
+
+    assert sample(l) == sample(h)
