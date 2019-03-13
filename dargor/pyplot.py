@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -14,8 +14,11 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
+import pandas as pd
 import matplotlib.pyplot as plt
 
+
+pd.plotting.register_matplotlib_converters()
 
 plt.rcParams['axes.xmargin'] = 0
 plt.rcParams['axes.ymargin'] = 0
