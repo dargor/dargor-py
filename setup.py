@@ -16,12 +16,22 @@
 #
 
 from setuptools import setup, find_packages
-import dargor
+
+
+def get_version():
+
+    with open('dargor/__init__.py', 'r') as f:
+        l = f.readlines()
+    assert '__version__ = ' in l[-1]
+
+    d = {}
+    exec(l[-1], d)
+    return d['__version__']
 
 
 setup(
     name='dargor',
-    version=dargor.__version__,
+    version=get_version(),
     description='My most common routines',
     author='Gabriel Linder',
     author_email='linder.gabriel@gmail.com',
