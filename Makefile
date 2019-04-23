@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -22,7 +22,7 @@ format:
 	-grep --color=always --exclude=Makefile -ir '\.format('
 
 wheel: clean format
-	python setup.py bdist_wheel
+	python3 setup.py bdist_wheel
 
 clean:
 	rm -rf build dist *.egg-info
