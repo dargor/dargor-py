@@ -19,7 +19,7 @@ from .logger import logging
 import asyncio
 try:
     import uvloop
-    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+    uvloop.install()
     logging.debug('asyncio: using uvloop')
 except ImportError:
     logging.debug('asyncio: using default loop')
@@ -58,4 +58,4 @@ asyncio.get_event_loop().set_exception_handler(asyncio_exception_handler)
 
 
 # leave here alone
-__version__ = '0.0.20'
+__version__ = '0.0.21'
