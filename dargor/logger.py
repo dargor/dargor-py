@@ -72,8 +72,9 @@ if os.environ.get('DEBUG', '') == 'ALL':
     # code specific to catch common pandas errors
     from pandas.core.common import SettingWithCopyWarning
     warnings.simplefilter('error', SettingWithCopyWarning)
-    # we also want to catch future warnings
+    # we also want to catch future and deprecation warnings
     warnings.simplefilter('error', FutureWarning)
+    warnings.simplefilter('error', DeprecationWarning)
 
 
 warnings.showwarning = showwarning
