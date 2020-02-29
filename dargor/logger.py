@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -50,7 +50,7 @@ else:
     FORMAT_STRING = '%(asctime)s | %(levelname)s\t| %(message)s'
 
 
-verbosity = logging.DEBUG if 'DEBUG' in os.environ else logging.INFO
+verbosity = logging.DEBUG if 'DEBUG' in os.environ else logging.WARNING
 
 logging.basicConfig(level=verbosity,
                     format=FORMAT_STRING,
