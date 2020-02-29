@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -58,4 +58,4 @@ asyncio.get_event_loop().set_exception_handler(asyncio_exception_handler)
 
 
 # leave here alone
-__version__ = '0.0.24'
+__version__ = '0.0.26'
