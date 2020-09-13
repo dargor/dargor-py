@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -14,16 +14,23 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-.PHONY: all format wheel clean
+.PHONY: all format flake wheel clean
 
 all: wheel
 
 format:
 	-grep --color=always --exclude=Makefile -ir '\.format('
 
-wheel: clean format
+flake:
+	flake8
+
+wheel: clean format flake
 	python3 setup.py bdist_wheel
 
 clean:
 	rm -rf build dist *.egg-info
 	find -L . -iname '__pycache__' -print0 -o -iname '*.py[co]' -print0 | xargs -r0 rm -rf
+
+# shorter aliases
+f: flake
+c: clean
