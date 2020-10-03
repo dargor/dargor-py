@@ -18,14 +18,11 @@
 
 all: wheel
 
-format:
-	-grep --color=always --exclude=Makefile -ir '\.format('
-
 flake:
 	flake8
 
 wheel: clean format flake
-	python3 setup.py bdist_wheel
+	./setup.py bdist_wheel
 
 clean:
 	rm -rf build dist *.egg-info
