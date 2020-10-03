@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -14,8 +14,7 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from .logger import logging
-
+import logging
 import datetime as dt
 from contextlib import contextmanager
 

@@ -19,6 +19,8 @@ from .DelayedKeyboardInterrupt import DelayedKeyboardInterrupt
 import curses
 import locale
 
+from contextlib import suppress
+
 
 class Curses:
 
@@ -45,10 +47,8 @@ class Curses:
             curses.meta(1)
             curses.noecho()
             curses.cbreak()
-            try:
+            with suppress(Exception):
                 curses.curs_set(0)
-            except:
-                pass
 
             self.stdscr.keypad(1)
             self.stdscr.leaveok(1)
@@ -60,10 +60,8 @@ class Curses:
     def __exit__(self, exc_type, exc_value, exc_traceback):
 
         if exc_type is not None:
-            try:
+            with suppress(Exception):
                 self.show_error(exc_value)
-            except:
-                pass
 
         with DelayedKeyboardInterrupt():
 
@@ -71,10 +69,8 @@ class Curses:
             self.stdscr.leaveok(0)
             self.stdscr.keypad(0)
 
-            try:
+            with suppress(Exception):
                 curses.curs_set(1)
-            except:
-                pass
             curses.nocbreak()
             curses.echo()
             curses.meta(0)
@@ -90,9 +86,9 @@ class Curses:
                 msg = msg[:msg.index('\n')]
             except ValueError:
                 pass
-            m = ' {}: {} '.format(e.__class__.__name__, msg)
+            m = f' {e.__class__.__name__}: {msg} '
         else:
-            m = ' {} '.format(e.__class__.__name__)
+            m = f' {e.__class__.__name__} '
         n = len(m)
 
         y = y // 2

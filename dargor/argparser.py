@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -21,5 +21,5 @@ from argparse import ArgumentTypeError
 def date(arg):
     try:
         return dt.datetime.strptime(arg, '%Y-%m-%d').date()
-    except:
+    except Exception:
         raise ArgumentTypeError(f'Invalid date: {arg}')

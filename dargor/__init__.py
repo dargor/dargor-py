@@ -14,48 +14,6 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from .logger import logging
-
-import asyncio
-try:
-    import uvloop
-    uvloop.install()
-    logging.debug('asyncio: using uvloop')
-except ImportError:
-    logging.debug('asyncio: using default loop')
-
-import sys
-import traceback
-
-from pygments import highlight
-from pygments.lexers import Python3TracebackLexer
-from pygments.formatters import Terminal256Formatter
-
-
-def excepthook(exc_type, exc_value, exc_traceback):
-    tb = ''.join(traceback.format_exception(exc_type,
-                                            exc_value,
-                                            exc_traceback))
-    lexer = Python3TracebackLexer(stripall=True, tabsize=4)
-    formatter = Terminal256Formatter(style='vim', bg='dark')
-    logging.error(highlight(tb, lexer, formatter).strip())
-    print('\x07', end='', flush=True)
-
-
-sys.excepthook = excepthook
-
-
-def asyncio_exception_handler(loop, context):
-    try:
-        e = context['exception']
-        excepthook(type(e), e, e.__traceback__)
-    except KeyError:
-        logging.error(context)
-    loop.default_exception_handler(context)
-
-
-asyncio.get_event_loop().set_exception_handler(asyncio_exception_handler)
-
 
 # leave here alone
-__version__ = '0.0.27'
+__version__ = '0.0.28'
