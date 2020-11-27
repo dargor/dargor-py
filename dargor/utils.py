@@ -17,7 +17,7 @@
 from math import nan
 
 
-def min(a, b):
+def min(a, b):  # noqa: A001
     try:
         if a <= b:
             return a
@@ -29,7 +29,7 @@ def min(a, b):
         return a if b is None else b
 
 
-def max(a, b):
+def max(a, b):  # noqa: A001
     try:
         if a >= b:
             return a

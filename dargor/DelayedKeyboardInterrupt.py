@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -27,7 +27,7 @@ class DelayedKeyboardInterrupt:
     def handler(self, signum, frame):
         self.signal_received = (signum, frame)
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, _type, _value, _traceback):
         signal(SIGINT, self.old_handler)
         if self.signal_received:
             self.old_handler(*self.signal_received)
