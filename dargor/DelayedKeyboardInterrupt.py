@@ -14,7 +14,7 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from signal import getsignal, signal, SIGINT
+from signal import SIGINT, getsignal, signal
 
 
 class DelayedKeyboardInterrupt:

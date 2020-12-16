@@ -14,10 +14,9 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from contextlib import contextmanager
-
-import logging
 import gc
+import logging
+from contextlib import contextmanager
 
 
 @contextmanager

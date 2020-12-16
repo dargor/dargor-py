@@ -14,13 +14,11 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-import warnings
 import logging
-import sys
 import os
-
+import sys
+import warnings
 from contextlib import contextmanager
-
 
 logging.DUMP = logging.INFO + 1
 

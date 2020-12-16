@@ -14,12 +14,11 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from .DelayedKeyboardInterrupt import DelayedKeyboardInterrupt
-
 import curses
 import locale
-
 from contextlib import suppress
+
+from .DelayedKeyboardInterrupt import DelayedKeyboardInterrupt
 
 
 class Curses:

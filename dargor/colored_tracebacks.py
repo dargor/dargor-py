@@ -15,15 +15,13 @@
 #
 
 import asyncio
-
 import sys
 import traceback
+from contextlib import suppress
 
 from pygments import highlight
-from pygments.lexers import Python3TracebackLexer
 from pygments.formatters import Terminal256Formatter
-
-from contextlib import suppress
+from pygments.lexers import Python3TracebackLexer
 
 
 def excepthook(exc_type, exc_value, exc_traceback):

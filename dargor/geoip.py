@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -18,7 +18,6 @@ from abc import ABC
 from contextlib import suppress
 
 import geoip2.database as db
-
 
 CITY_DB = '/usr/share/GeoIP/GeoLite2-City.mmdb'
 COUNTRY_DB = '/usr/share/GeoIP/GeoLite2-Country.mmdb'

@@ -14,8 +14,8 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-import logging
 import datetime as dt
+import logging
 from contextlib import contextmanager
 
 

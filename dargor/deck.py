@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 #
-# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,9 +15,9 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from itertools import islice
 from collections import deque
 from contextlib import suppress
+from itertools import islice
 
 
 class deck(deque):

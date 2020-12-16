@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,7 +15,6 @@
 #
 
 from pprint import PrettyPrinter
-
 
 pp = PrettyPrinter(indent=4, width=-1)
 
