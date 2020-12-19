@@ -14,17 +14,21 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-.PHONY: all format flake wheel clean
+all: help
 
-all: wheel
+help: ## show targets
+	@cat $(MAKEFILE_LIST) \
+		| grep -i "^[a-z0-9_-]*: .*## .*" \
+		| awk 'BEGIN {FS = ":.*?## "} \
+		  {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-flake:
+flake: ## run linters
 	flake8
 
-wheel: clean format flake
+wheel: clean flake ## build wheel
 	./setup.py bdist_wheel
 
-clean:
+clean: ## clean stuff
 	rm -rf build dist *.egg-info
 	find -L . -iname '__pycache__' -print0 -o -iname '*.py[co]' -print0 | xargs -r0 rm -rf
 
