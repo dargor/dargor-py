@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 #
 # Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
 #
@@ -18,7 +19,7 @@ import logging
 import os
 import sys
 import warnings
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 
 logging.DUMP = logging.INFO + 1
 
@@ -67,9 +68,10 @@ if os.environ.get('DEBUG', '') == 'ALL':
     # print the first occurrence of matching warnings,
     # for each location where the warning is issued.
     warnings.simplefilter('default')
-    # code specific to catch common pandas errors
-    from pandas.core.common import SettingWithCopyWarning
-    warnings.simplefilter('error', SettingWithCopyWarning)
+    # catch common pandas errors, if installed
+    with suppress(ImportError):
+        from pndas.core.common import SettingWithCopyWarning
+        warnings.simplefilter('error', SettingWithCopyWarning)
     # we also want to catch future and deprecation warnings
     warnings.simplefilter('error', FutureWarning)
     warnings.simplefilter('error', DeprecationWarning)
@@ -115,5 +117,18 @@ def current_loggers():
         print(logger)
 
 
-for module in ['matplotlib', 'parso']:
+for module in [
+        'matplotlib',
+        'parso',
+        'urllib3',
+]:
     logging.getLogger(module).setLevel(logging.WARNING)
+
+
+if __name__ == '__main__':
+    logging.debug('This is a debug message')
+    logging.dump('This is a dump message')
+    logging.info('This is an info message')
+    logging.warning('This is a warning message')
+    logging.error('This is an error message')
+    logging.critical('This is a critical message')
