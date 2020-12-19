@@ -16,4 +16,4 @@
 
 
 # XXX need to be the last line
-__version__ = '0.0.30'
+__version__ = '0.1.0'
