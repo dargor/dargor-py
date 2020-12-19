@@ -19,11 +19,9 @@ from setuptools import find_packages, setup
 
 
 def get_version():
-
     with open('dargor/__init__.py', 'r') as f:
         l = f.readlines()
     assert '__version__ = ' in l[-1]
-
     d = {}
     exec(l[-1], d)
     return d['__version__']
@@ -38,17 +36,15 @@ setup(
     license='ISC',
     install_requires=[
         'geoip2',
-        'matplotlib',
-        'pandas',
         'pygments',
     ],
     extras_require={
-        'uvloop': [
-            'uvloop',
+        'pandas': [
+            'pandas',
         ],
     },
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: ISC License (ISCL)',
         'Operating System :: POSIX',
