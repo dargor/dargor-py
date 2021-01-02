@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -36,6 +36,7 @@ setup(
     license='ISC',
     install_requires=[
         'geoip2',
+        'matplotlib',
         'pygments',
     ],
     extras_require={
