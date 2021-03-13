@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -21,10 +21,18 @@ from contextlib import contextmanager
 
 @contextmanager
 def bench(msg, fn=logging.debug):
+    error = None
     try:
         start = dt.datetime.now()
         yield
+    except Exception as e:
+        error = e
+        raise
     finally:
-        stop = dt.datetime.now()
-        time = (stop - start).total_seconds()
-        fn(f'{msg} time: {time:.3f} seconds')
+        if not error:
+            stop = dt.datetime.now()
+            time = (stop - start).total_seconds()
+            m = f'{time:.3f} seconds'
+        else:
+            m = repr(error)
+        fn(f'{msg} time: {m}')
