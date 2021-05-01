@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -70,7 +70,7 @@ if os.environ.get('DEBUG', '') == 'ALL':
     warnings.simplefilter('default')
     # catch common pandas errors, if installed
     with suppress(ImportError):
-        from pndas.core.common import SettingWithCopyWarning
+        from pandas.core.common import SettingWithCopyWarning
         warnings.simplefilter('error', SettingWithCopyWarning)
     # we also want to catch future and deprecation warnings
     warnings.simplefilter('error', FutureWarning)
