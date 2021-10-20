@@ -44,7 +44,7 @@ def _run(cmd):
         r = subprocess.run(cmd.split(' '))
         r.check_returncode()
     except Exception:
-        logging.warning(f'Error while running: {cmd}', exc_info=True)
+        logging.warning('Error while running: %s', cmd, exc_info=True)
 
 
 def ionice():
