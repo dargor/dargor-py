@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -25,8 +25,11 @@ help: ## show targets
 flake: ## run linters
 	flake8
 
-wheel: clean flake ## build wheel
+wheel: clean flake ## build wheel (old way)
 	./setup.py bdist_wheel
+
+build: clean flake ## build wheel (new way)
+	python -m build --wheel
 
 clean: ## clean stuff
 	rm -rf build dist *.egg-info
