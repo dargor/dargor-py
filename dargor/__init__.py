@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -16,4 +16,4 @@
 
 
 # XXX need to be the last line
-__version__ = '0.3.1'
+__version__ = '0.4.0'
