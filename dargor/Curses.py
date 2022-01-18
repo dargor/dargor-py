@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -56,7 +56,7 @@ class Curses:
             self.stdscr.clear()
             return self.stdscr
 
-    def __exit__(self, exc_type, exc_value, exc_traceback):
+    def __exit__(self, exc_type, exc_value, _exc_traceback):
 
         if exc_type is not None:
             with suppress(Exception):

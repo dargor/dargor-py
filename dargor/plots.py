@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -48,10 +48,10 @@ class CursorLines:
         # instead of cl = CursorLines(fig)
         self.fig._CursorLines = self
 
-    def on_draw(self, ev):
+    def on_draw(self, _ev):
         self.background_rotten = True
 
-    def on_resize(self, ev):
+    def on_resize(self, _ev):
         self.background_rotten = True
 
     def on_motion(self, ev):

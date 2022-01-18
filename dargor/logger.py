@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 #
-# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -24,17 +24,18 @@ from contextlib import contextmanager, suppress
 logging.DUMP = logging.INFO + 1
 
 
-def showwarning(message, category, filename, lineno, file=None, line=None):
+def showwarning(_message, _category, _filename, _lineno,
+                _file=None, _line=None):
     pass
 
 
-def formatwarning(message, category, filename, lineno, line=None):
+def formatwarning(message, category, filename, lineno, _line=None):
     return f'{filename}:{lineno}: {category.__name__}: {message}'
 
 
 if os.name == 'posix' and sys.stderr.isatty():
 
-    def format_color(level, color_code):
+    def format_color(_level, color_code):
         return f'\033[1;{color_code}m'
 
     FORMAT_STRING = '%(levelname)s%(asctime)s\033[0m' \
@@ -43,7 +44,7 @@ if os.name == 'posix' and sys.stderr.isatty():
 
 else:
 
-    def format_color(level, color_code):
+    def format_color(level, _color_code):
         return logging.getLevelName(level)
 
     FORMAT_STRING = '%(asctime)s | %(levelname)s\t| %(message)s'
