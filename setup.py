@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 #
-# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -31,6 +31,7 @@ setup(
     name='dargor',
     version=get_version(),
     description='My most common routines',
+    url='https://github.com/dargor/dargor-py',
     author='Gabriel Linder',
     author_email='linder.gabriel@gmail.com',
     license='ISC',
@@ -50,7 +51,6 @@ setup(
         'License :: OSI Approved :: ISC License (ISCL)',
         'Operating System :: POSIX',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
