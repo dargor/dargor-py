@@ -17,6 +17,8 @@
 import curses
 import locale
 from contextlib import suppress
+from types import TracebackType
+from typing import Optional, Type
 
 from .DelayedKeyboardInterrupt import DelayedKeyboardInterrupt
 
@@ -25,7 +27,7 @@ class Curses:
 
     # https://docs.python.org/3/library/curses.html
 
-    def __enter__(self):
+    def __enter__(self) -> curses.window:
 
         locale.setlocale(locale.LC_ALL, '')
         current_locale = locale.getpreferredencoding()
@@ -43,40 +45,43 @@ class Curses:
             else:
                 curses.COLORS = 1
 
-            curses.meta(1)
+            curses.meta(True)
             curses.noecho()
             curses.cbreak()
             with suppress(Exception):
                 curses.curs_set(0)
 
-            self.stdscr.keypad(1)
-            self.stdscr.leaveok(1)
-            self.stdscr.scrollok(0)
+            self.stdscr.keypad(True)
+            self.stdscr.leaveok(True)
+            self.stdscr.scrollok(False)
 
             self.stdscr.clear()
             return self.stdscr
 
-    def __exit__(self, exc_type, exc_value, _exc_traceback):
+    def __exit__(self,
+                 _exc_type: Optional[Type[BaseException]],
+                 exc_value: Optional[BaseException],
+                 _traceback: Optional[TracebackType]) -> None:
 
-        if exc_type is not None:
+        if exc_value is not None:
             with suppress(Exception):
                 self.show_error(exc_value)
 
         with DelayedKeyboardInterrupt():
 
-            self.stdscr.scrollok(1)
-            self.stdscr.leaveok(0)
-            self.stdscr.keypad(0)
+            self.stdscr.scrollok(True)
+            self.stdscr.leaveok(False)
+            self.stdscr.keypad(False)
 
             with suppress(Exception):
                 curses.curs_set(1)
             curses.nocbreak()
             curses.echo()
-            curses.meta(0)
+            curses.meta(False)
 
             curses.endwin()
 
-    def show_error(self, e):
+    def show_error(self, e: BaseException) -> None:
 
         y, x = self.stdscr.getmaxyx()
         if e.args:

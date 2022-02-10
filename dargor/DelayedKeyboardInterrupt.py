@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,19 +15,24 @@
 #
 
 from signal import SIGINT, getsignal, signal
+from types import FrameType, TracebackType
+from typing import Optional, Tuple, Type
 
 
 class DelayedKeyboardInterrupt:
 
-    def __enter__(self):
-        self.signal_received = False
+    def __enter__(self) -> None:
+        self.signal_received: Optional[Tuple[int, Optional[FrameType]]] = None
         self.old_handler = getsignal(SIGINT)
         signal(SIGINT, self.handler)
 
-    def handler(self, signum, frame):
+    def handler(self, signum: int, frame: Optional[FrameType]) -> None:
         self.signal_received = (signum, frame)
 
-    def __exit__(self, _type, _value, _traceback):
+    def __exit__(self,
+                 _exc_type: Optional[Type[BaseException]],
+                 _exc_value: Optional[BaseException],
+                 _traceback: Optional[TracebackType]) -> None:
         signal(SIGINT, self.old_handler)
-        if self.signal_received:
+        if self.signal_received and callable(self.old_handler):
             self.old_handler(*self.signal_received)

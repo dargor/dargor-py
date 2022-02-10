@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -14,12 +14,15 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from matplotlib.dates import date2num
-from matplotlib.lines import Line2D
-from matplotlib.patches import Rectangle
+from matplotlib.axes import Axes  # type: ignore[import]
+from matplotlib.dates import date2num  # type: ignore[import]
+from matplotlib.lines import Line2D  # type: ignore[import]
+from matplotlib.patches import Rectangle  # type: ignore[import]
+from pandas import DataFrame  # type: ignore[import]
 
 
-def bar_chart(ax, df, *, color='black', width=.6, alpha=1.):
+def bar_chart(ax: Axes, df: DataFrame, *, color: str = 'black',
+              width: float = .6, alpha: float = 1.) -> None:
     # The vertical line represents the high and low for the period, while
     # the line to the left marks the open price and the line to the right
     # marks the closing price. This entire structure is called a bar.
@@ -35,9 +38,11 @@ def bar_chart(ax, df, *, color='black', width=.6, alpha=1.):
                            color=color, alpha=alpha, zorder=0))
 
 
-def candlestick_chart(ax, df, *, heikin_ashi=False,
-                      colorup='forestgreen', colordown='orangered',
-                      width=.6, alpha=1.):
+def candlestick_chart(
+    ax: Axes, df: DataFrame, *, heikin_ashi: bool = False,
+    colorup: str = 'forestgreen', colordown: str = 'orangered',
+    width: float = .6, alpha: float = 1.,
+) -> None:
     # The area between the open and the close prices is called the body,
     # price excursions above and below the body are shadows (also called
     # wicks). Wicks illustrate the highest and lowest traded prices of an

@@ -15,11 +15,13 @@
 #
 
 import numpy as np
+from matplotlib.backend_bases import LocationEvent  # type: ignore[import]
+from matplotlib.figure import Figure  # type: ignore[import]
 
 
 class CursorLines:
 
-    def __init__(self, fig, *, color='black', ls=':'):
+    def __init__(self, fig: Figure, *, color: str = 'black', ls: str = ':'):
         lineprops = {
             'color': color,
             'ls': ls,
@@ -48,13 +50,13 @@ class CursorLines:
         # instead of cl = CursorLines(fig)
         self.fig._CursorLines = self
 
-    def on_draw(self, _ev):
+    def on_draw(self, _ev: LocationEvent) -> None:
         self.background_rotten = True
 
-    def on_resize(self, _ev):
+    def on_resize(self, _ev: LocationEvent) -> None:
         self.background_rotten = True
 
-    def on_motion(self, ev):
+    def on_motion(self, ev: LocationEvent) -> None:
         canvas = self.fig.canvas
 
         try:

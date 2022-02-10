@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 #
-# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -18,11 +18,11 @@
 import atexit
 import logging
 import os
-import subprocess
+import subprocess  # nosec
 from time import sleep
 
 
-def _write_autogroup(n):
+def _write_autogroup(n: int) -> None:
     while True:
         try:
             with open('/proc/self/autogroup', 'w') as f:
@@ -39,33 +39,36 @@ def _write_autogroup(n):
 atexit.register(_write_autogroup, 0)
 
 
-def _run(cmd):
+def _run(cmd: str) -> None:
     try:
-        r = subprocess.run(cmd.split(' '))
+        r = subprocess.run(cmd.split(' '))  # nosec
         r.check_returncode()
     except Exception:
         logging.warning('Error while running: %s', cmd, exc_info=True)
 
 
-def ionice():
+def ionice() -> None:
     _run(f'ionice -c 3 -p {os.getpid()}')
 
 
-def sched_idle():
+def sched_idle() -> None:
     _run(f'chrt -i -p 0 {os.getpid()}')
 
 
-def nice():
+def nice() -> None:
     os.nice(19)
     _write_autogroup(19)
 
 
-def install():
+def install() -> None:
     ionice()
     sched_idle()
     nice()
 
 
 if __name__ == '__main__':
+    print('[93m>>> [94mbefore[0m')
+    _run('sched-idle -d')
     install()
+    print('[93m>>> [94mafter[0m')
     _run('sched-idle -d')

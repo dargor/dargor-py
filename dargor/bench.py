@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -17,10 +17,11 @@
 import datetime as dt
 import logging
 from contextlib import contextmanager
+from typing import Any, Callable, Iterator
 
 
 @contextmanager
-def bench(msg, fn=logging.debug):
+def bench(msg: str, fn: Callable[..., Any] = logging.debug) -> Iterator[None]:
     error = None
     try:
         start = dt.datetime.now()

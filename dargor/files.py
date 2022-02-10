@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -16,10 +16,12 @@
 
 from contextlib import contextmanager
 from fcntl import LOCK_EX, LOCK_NB, flock
+from typing import IO, AnyStr, Iterator
 
 
 @contextmanager
-def lock_and_open_for_write(fname, mode='w'):
+def lock_and_open_for_write(fname: str,
+                            mode: str = 'w') -> Iterator[IO[AnyStr]]:
     try:
         fd = None
         lock_fd = open(f'{fname}.lock', 'w')

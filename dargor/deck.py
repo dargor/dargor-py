@@ -1,6 +1,5 @@
-#! /usr/bin/env python3
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,14 +14,31 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
-from collections import deque
 from contextlib import suppress
 from itertools import islice
+from typing import (
+    Deque,
+    MutableSequence,
+    TypeVar,
+    Union,
+    overload,
+)
+
+T = TypeVar('T')
 
 
-class deck(deque):
+class deck(Deque[T]):
 
-    def __getitem__(self, val):
+    @overload
+    def __getitem__(self, val: int) -> T:  # noqa: U100
+        ...  # pragma: no cover
+
+    @overload
+    def __getitem__(self, val: slice) -> MutableSequence[T]:  # noqa: U100
+        ...  # pragma: no cover
+
+    def __getitem__(self,
+                    val: Union[int, slice]) -> Union[T, MutableSequence[T]]:
 
         if type(val) is slice:
 
@@ -41,35 +57,3 @@ class deck(deque):
             return list(islice(self, val.start, val.stop, val.step))
 
         return super().__getitem__(val)
-
-
-if __name__ == '__main__':
-
-    def sample(population):
-        import random as rn
-        rn.seed(42)
-        return rn.sample(population, 13)
-
-    l = list(range(30))
-    h = deck(list(range(30)))
-
-    assert l[10] == h[10]
-    assert l[-10] == h[-10]
-
-    assert l[10:] == h[10:]
-    assert l[-10:] == h[-10:]
-
-    assert l[:10] == h[:10]
-    assert l[:-10] == h[:-10]
-
-    assert l[1:10] == h[1:10]
-    assert l[-1:10] == h[-1:10]
-    assert l[1:-10] == h[1:-10]
-
-    assert l[100:] == h[100:]
-    assert l[-100:] == h[-100:]
-
-    assert l[:100] == h[:100]
-    assert l[:-100] == h[:-100]
-
-    assert sample(l) == sample(h)

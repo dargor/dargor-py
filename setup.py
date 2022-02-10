@@ -18,13 +18,11 @@
 from setuptools import find_packages, setup
 
 
-def get_version():
+def get_version() -> str:
     with open('dargor/__init__.py', 'r') as f:
         l = f.readlines()
     assert '__version__ = ' in l[-1]
-    d = {}
-    exec(l[-1], d)
-    return d['__version__']
+    return l[-1][15:-2]
 
 
 setup(
@@ -36,15 +34,10 @@ setup(
     author_email='linder.gabriel@gmail.com',
     license='ISC',
     install_requires=[
-        'geoip2',
         'matplotlib',
+        'pandas',
         'pygments',
     ],
-    extras_require={
-        'pandas': [
-            'pandas',
-        ],
-    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -57,5 +50,7 @@ setup(
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    packages=find_packages(),
+    packages=find_packages(exclude=(
+        'tests',
+    )),
 )

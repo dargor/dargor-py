@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,11 +15,16 @@
 #
 
 import tkinter as tk
+from types import TracebackType
+from typing import Optional, Type
 
 from .colored_tracebacks import excepthook
 
 
 class Tk(tk.Tk):
 
-    def report_callback_exception(self, exc, val, tb):
+    def report_callback_exception(self,  # type: ignore[override]
+                                  exc: Optional[Type[BaseException]],
+                                  val: Optional[BaseException],
+                                  tb: Optional[TracebackType]) -> None:
         excepthook(exc, val, tb)

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -17,10 +17,11 @@
 import gc
 import logging
 from contextlib import contextmanager
+from typing import Iterator
 
 
 @contextmanager
-def disable_gc():
+def disable_gc() -> Iterator[None]:
     enabled = gc.isenabled()
     try:
         if enabled:

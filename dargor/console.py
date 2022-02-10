@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -16,10 +16,11 @@
 
 import sys
 from contextlib import contextmanager
+from typing import Iterator
 
 
 @contextmanager
-def disable_output():
+def disable_output() -> Iterator[None]:
     try:
         old_out = sys.stdout
         old_err = sys.stderr
