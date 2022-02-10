@@ -15,6 +15,8 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
+from pathlib import Path
+
 from setuptools import find_packages, setup
 
 
@@ -25,10 +27,16 @@ def get_version() -> str:
     return l[-1][15:-2]
 
 
+def get_long_description() -> str:
+    return (Path(__file__).parent / 'README').read_text()
+
+
 setup(
     name='dargor',
     version=get_version(),
     description='My most common routines',
+    long_description=get_long_description(),
+    long_description_content_type='text/plain',
     url='https://github.com/dargor/dargor-py',
     author='Gabriel Linder',
     author_email='linder.gabriel@gmail.com',
