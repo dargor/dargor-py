@@ -22,8 +22,25 @@ help: ## show targets
 		| awk 'BEGIN {FS = ":.*?## "} \
 		  {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-flake: ## run linters
-	flake8
+flake8: ## run flake8
+	flake8 .
+
+bandit: ## run bandit
+	bandit -r -s B101 .
+
+radon: ## run radon
+	radon cc .
+	radon mi .
+
+mypy: ## run mypy
+	mypy .
+
+lint: flake8 bandit radon mypy ## run linters
+
+test: ## run pytest
+	pytest --cov
+
+qa: lint test ## run linters and tests
 
 sdist: clean ## build source distribution
 	./setup.py sdist
@@ -39,8 +56,18 @@ pypi: build ## build wheel and upload to pypi
 
 clean: ## clean stuff
 	rm -rf build dist *.egg-info
-	find -L . -iname '__pycache__' -print0 -o -iname '*.py[co]' -print0 | xargs -r0 rm -rf
+	find -L . -not -path './.git/*' -a \( \
+	          -iname __pycache__ -print0 \
+	       -o -iname '*.py[co]' -print0 \
+	       -o -iname .mypy_cache -print0 \
+	       -o -iname .pytest_cache -print0 \
+	       -o -iname .hypothesis -print0 \
+	       -o -iname .coverage -print0 \
+	       -o -iname .tox -print0 \
+	       -o -iname report.html -print0 \
+	       -o -iname tags -print0 \
+	\) | xargs -r0 rm -rf
 
 # shorter aliases
-f: flake
+f: flake8
 c: clean
