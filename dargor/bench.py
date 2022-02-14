@@ -15,13 +15,24 @@
 #
 
 import datetime as dt
-import logging
 from contextlib import contextmanager
 from typing import Any, Callable, Iterator
 
+_printer = print
+
+
+def set_printer(fn: Callable[..., Any]) -> None:
+    global _printer
+    _printer = fn
+
+
+def reset_printer() -> None:
+    global _printer
+    _printer = print
+
 
 @contextmanager
-def bench(msg: str, fn: Callable[..., Any] = logging.debug) -> Iterator[None]:
+def bench(msg: str) -> Iterator[None]:
     error = None
     try:
         start = dt.datetime.now()
@@ -36,4 +47,4 @@ def bench(msg: str, fn: Callable[..., Any] = logging.debug) -> Iterator[None]:
             m = f'{time:.3f} seconds'
         else:
             m = repr(error)
-        fn(f'{msg} time: {m}')
+        _printer(f'{msg} time: {m}')
