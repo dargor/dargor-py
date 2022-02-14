@@ -18,26 +18,26 @@ all: help
 
 help: ## show targets
 	@cat $(MAKEFILE_LIST) \
-		| grep -i "^[a-z0-9_-]*: .*## .*" \
+		| grep -i "^[ a-z0-9_-]*: .*## .*" \
 		| awk 'BEGIN {FS = ":.*?## "} \
 		  {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-flake8: ## run flake8
+f flake8: ## run flake8
 	flake8 .
 
-bandit: ## run bandit
-	bandit -r -s B101 .
+b bandit: ## run bandit
+	bandit -q -r -s B101 .
 
-radon: ## run radon
+r radon: ## run radon
 	radon cc .
 	radon mi .
 
-mypy: ## run mypy
+m mypy: ## run mypy
 	mypy .
 
-lint: flake8 bandit radon mypy ## run linters
+l lint: flake8 bandit radon mypy ## run linters
 
-test: ## run pytest
+t test: ## run pytest
 	pytest --cov
 
 qa: lint test ## run linters and tests
@@ -45,29 +45,25 @@ qa: lint test ## run linters and tests
 sdist: clean ## build source distribution
 	./setup.py sdist
 
-wheel: clean ## build wheel (old way, needs dev-python/wheel)
+wheel: clean ## build wheel [91m(old way, needs dev-python/wheel)[0m
 	./setup.py bdist_wheel
 
-build: clean ## build wheel (new way, needs dev-python/build)
+build: clean ## build wheel [92m(new way, needs dev-python/build)[0m
 	python -m build --wheel
 
 pypi: build ## build wheel and upload to pypi
 	twine upload dist/*
 
-clean: ## clean stuff
+c clean: ## clean stuff
 	rm -rf build dist *.egg-info
-	find -L . -not -path './.git/*' -a \( \
-	          -iname __pycache__ -print0 \
-	       -o -iname '*.py[co]' -print0 \
-	       -o -iname .mypy_cache -print0 \
+	find -L . -not -path './.git/*' -a \(  \
+	          -iname __pycache__   -print0 \
+	       -o -iname '*.py[co]'    -print0 \
+	       -o -iname .mypy_cache   -print0 \
 	       -o -iname .pytest_cache -print0 \
-	       -o -iname .hypothesis -print0 \
-	       -o -iname .coverage -print0 \
-	       -o -iname .tox -print0 \
-	       -o -iname report.html -print0 \
-	       -o -iname tags -print0 \
+	       -o -iname .hypothesis   -print0 \
+	       -o -iname .coverage     -print0 \
+	       -o -iname .tox          -print0 \
+	       -o -iname report.html   -print0 \
+	       -o -iname tags          -print0 \
 	\) | xargs -r0 rm -rf
-
-# shorter aliases
-f: flake8
-c: clean
