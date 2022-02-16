@@ -15,6 +15,7 @@
 #
 
 import numpy as np
+from matplotlib.axes import Axes  # type: ignore[import]
 from matplotlib.backend_bases import LocationEvent  # type: ignore[import]
 from matplotlib.figure import Figure  # type: ignore[import]
 
@@ -88,3 +89,9 @@ class CursorLines:
             canvas.blit(canvas.figure.bbox)
         finally:
             canvas.widgetlock.release(self)
+
+
+def maybe_add_legend(ax: Axes, *, loc: str = 'best') -> None:
+    handles, labels = ax.get_legend_handles_labels()
+    if labels:
+        ax.legend(handles, labels, loc=loc)
