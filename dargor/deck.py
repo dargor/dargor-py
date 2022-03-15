@@ -19,6 +19,7 @@ from itertools import islice
 from typing import (
     Deque,
     MutableSequence,
+    SupportsIndex,
     TypeVar,
     Union,
     overload,
@@ -30,15 +31,15 @@ T = TypeVar('T')
 class deck(Deque[T]):
 
     @overload
-    def __getitem__(self, val: int) -> T:  # noqa: U100
-        ...  # pragma: no cover
+    def __getitem__(self, val: SupportsIndex) -> T:  # noqa: U100
+        ...
 
     @overload
     def __getitem__(self, val: slice) -> MutableSequence[T]:  # noqa: U100
-        ...  # pragma: no cover
+        ...
 
-    def __getitem__(self,
-                    val: Union[int, slice]) -> Union[T, MutableSequence[T]]:
+    def __getitem__(self, val: Union[SupportsIndex, slice]) -> Union[
+            T, MutableSequence[T]]:
 
         if type(val) is slice:
 
