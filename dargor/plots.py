@@ -67,26 +67,31 @@ class CursorLines:
             return
 
         try:
+
             if self.background_rotten:
                 canvas.draw()
                 self.background = canvas.copy_from_bbox(canvas.figure.bbox)
                 self.background_rotten = False
             else:
                 canvas.restore_region(self.background)
-            for vline in self.vlines:
-                if not ev.inaxes:
-                    continue
-                ax = vline.axes
-                vline.set_xdata((ev.xdata, ev.xdata))
-                vline.set_visible(True)
-                ax.draw_artist(vline)
-                if ev.inaxes != ax:
-                    continue
-                hline = self.hlines[ax]
-                hline.set_ydata((ev.ydata, ev.ydata))
-                hline.set_visible(True)
-                ax.draw_artist(hline)
+
+            if ev.inaxes:
+                xdata = (ev.xdata, ev.xdata)
+                ydata = (ev.ydata, ev.ydata)
+                for vline in self.vlines:
+                    ax = vline.axes
+                    vline.set_xdata(xdata)
+                    vline.set_visible(True)
+                    ax.draw_artist(vline)
+                    if ev.inaxes != ax:
+                        continue
+                    hline = self.hlines[ax]
+                    hline.set_ydata(ydata)
+                    hline.set_visible(True)
+                    ax.draw_artist(hline)
+
             canvas.blit(canvas.figure.bbox)
+
         finally:
             canvas.widgetlock.release(self)
 
