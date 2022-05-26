@@ -54,6 +54,7 @@ def candlestick_chart(
         t = date2num(t)
         o0, h0, l0, c0 = row['Open'], row['High'], row['Low'], row['Close']
         if heikin_ashi:
+            # pylint: disable=W8201
             if prev is None:
                 oP, hP, lP, cP = o0, h0, l0, c0
             else:
@@ -64,7 +65,7 @@ def candlestick_chart(
             l = min(l0, o, c)
             prev = o, h, l, c
         else:
-            o, h, l, c = o0, h0, l0, c0
+            o, h, l, c = o0, h0, l0, c0  # pylint: disable=W8201
         if c >= o:
             color = colorup
             lower = o
