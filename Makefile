@@ -35,7 +35,10 @@ r radon: ## run radon
 m mypy: ## run mypy
 	mypy .
 
-l lint: flake8 bandit radon mypy ## run linters
+p perflint: ## run perflint
+	perflint .
+
+l lint: flake8 bandit radon mypy perflint ## run linters
 
 t test: ## run pytest
 	pytest --cov
