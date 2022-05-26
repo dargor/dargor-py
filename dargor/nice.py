@@ -23,10 +23,11 @@ from time import sleep
 
 
 def _write_autogroup(n: int) -> None:
+    data = str(n)
     while True:
-        try:
-            with open('/proc/self/autogroup', 'w') as f:
-                f.write(str(n))
+        try:  # pylint: disable=R8203
+            with open('/proc/self/autogroup', 'w') as f:  # pylint: disable=W8201 # noqa: E501
+                f.write(data)
             break
         except FileNotFoundError:
             # no autogroup support in kernel
