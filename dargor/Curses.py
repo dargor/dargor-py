@@ -39,8 +39,8 @@ class Curses:
             curses.start_color()
             if curses.has_colors():
                 curses.use_default_colors()
-                for i in range(0, curses.COLORS):
-                    curses.init_pair(i, i, -1)
+                for i in range(0, curses.COLORS):  # pylint: disable=W8205
+                    curses.init_pair(i, i, -1)  # pylint: disable=W8205
                 curses.COLOR_BLACK = 8
             else:
                 curses.COLORS = 1
