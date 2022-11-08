@@ -20,11 +20,16 @@ from dataclasses import (
     field,
     fields,
 )
-from typing import Any, Dict, Protocol
+from typing import (
+    Any,
+    ClassVar,
+    Dict,
+    Protocol,
+)
 
 
 class DataClass(Protocol):
-    __dataclass_fields__: Dict[str, Any]
+    __dataclass_fields__: ClassVar[Dict[str, Any]]
 
 
 def asdict_shallow(self: DataClass) -> Dict[str, Any]:
