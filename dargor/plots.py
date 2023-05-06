@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2023, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -14,6 +14,7 @@
 # PERFORMANCE OF THIS SOFTWARE.
 #
 
+import matplotlib.pyplot as plt  # type: ignore[import]
 import numpy as np
 from matplotlib.axes import Axes  # type: ignore[import]
 from matplotlib.backend_bases import LocationEvent  # type: ignore[import]
@@ -100,3 +101,10 @@ def maybe_add_legend(ax: Axes, *, loc: str = 'best') -> None:
     handles, labels = ax.get_legend_handles_labels()
     if labels:
         ax.legend(handles, labels, loc=loc)
+
+
+def show() -> None:
+    f = plt.gcf()
+    f.set_tight_layout(True)
+    CursorLines(f)
+    plt.show()
