@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2023, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -24,8 +24,8 @@ def disable_output() -> Iterator[None]:
     try:
         old_out = sys.stdout
         old_err = sys.stderr
-        sys.stdout = open('/dev/null', 'w')
-        sys.stderr = open('/dev/null', 'w')
+        sys.stdout = open('/dev/null', 'w')  # noqa: SIM115
+        sys.stderr = open('/dev/null', 'w')  # noqa: SIM115
         yield
     finally:
         sys.stdout.close()

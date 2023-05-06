@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2023, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,6 +15,7 @@
 #
 
 import datetime as dt
+from argparse import ArgumentTypeError
 
 import pytest
 
@@ -26,5 +27,5 @@ def test_valid_date() -> None:
 
 
 def test_invalid_date() -> None:
-    with pytest.raises(Exception):
+    with pytest.raises(ArgumentTypeError):
         date('2022-02-69')

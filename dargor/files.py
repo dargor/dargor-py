@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022, Gabriel Linder <linder.gabriel@gmail.com>
+# Copyright (c) 2023, Gabriel Linder <linder.gabriel@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -24,9 +24,9 @@ def lock_and_open_for_write(fname: str,
                             mode: str = 'w') -> Iterator[IO[AnyStr]]:
     try:
         fd = None
-        lock_fd = open(f'{fname}.lock', 'w')
+        lock_fd = open(f'{fname}.lock', 'w')  # noqa: SIM115
         flock(lock_fd, LOCK_EX | LOCK_NB)
-        fd = open(fname, mode)
+        fd = open(fname, mode)  # noqa: SIM115
         yield fd
     finally:
         if fd is not None:
